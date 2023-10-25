@@ -1,3 +1,5 @@
+import { ConnectionEventTypes, DidExchangeState } from "@aries-framework/core";
+
 export const setupConnectionListener = (agent, outOfBandRecord, cb) => {
   agent.events.on(
     ConnectionEventTypes.ConnectionStateChanged,

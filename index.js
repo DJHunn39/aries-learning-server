@@ -1,5 +1,6 @@
-import { initialiseOrgAgent } from "./aries/initialiseOrgAgent";
-import { createNewInvitation } from "./aries/createNewInvitation";
+import { initialiseOrgAgent } from "./aries/initialiseOrgAgent.js";
+import { createNewInvitation } from "./aries/createNewInvitation.js";
+import { setupConnectionListener } from "./aries/setupConnectionListener.js";
 
 const onConnection = () =>
   console.log(
@@ -11,14 +12,14 @@ const startServer = async () => {
   const agent = await initialiseOrgAgent();
 
   console.log("Creating invite for new credential");
-  const { outOfBandRecord, invitationUrl } = await createNewInvitation(agent); // how to get the URL into the RN app
+  const { outOfBandRecord, invitationUrl } = await createNewInvitation(agent);
 
   console.log(invitationUrl);
 
   console.log("Listening for connection changes...");
-  setupConnectionListener(acmeAgent, outOfBandRecord, onConnection);
+  setupConnectionListener(agent, outOfBandRecord, onConnection);
 };
 
-export default startServer();
+export default startServer;
 
 startServer();
