@@ -1,0 +1,16 @@
+{
+  "license": "CC-BY-SA-4.0",
+  "name": "validation",
+  "main": "server.js",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server"
+  },
+  "dependencies": {
+    "@aries-framework/askar": "^0.4.2",
+    "@aries-framework/core": "^0.4.2",
+    "@aries-framework/node": "^0.4.2",
+    "@hyperledger/aries-askar-nodejs": "^0.1.1"
+  }
+}
