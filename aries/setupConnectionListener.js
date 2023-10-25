@@ -14,10 +14,7 @@ export const setupConnectionListener = (agent, outOfBandRecord, cb) => {
         // Custom business logic can be included here
         // In this example we can send a basic message to the connection, but
         // anything is possible
-        cb();
-
-        // We exit the flow
-        process.exit(0);
+        return cb();
       }
     }
   );

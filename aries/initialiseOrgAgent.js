@@ -6,8 +6,21 @@ import {
   HttpOutboundTransport,
   WsOutboundTransport,
   ConnectionsModule,
+  DidsModule,
 } from "@aries-framework/core";
 import { HttpInboundTransport } from "@aries-framework/node";
+import {
+  IndyVdrAnonCredsRegistry,
+  IndyVdrIndyDidRegistrar,
+  IndyVdrIndyDidResolver,
+  IndyVdrModule,
+} from "@aries-framework/indy-vdr";
+import { indyVdr } from "@hyperledger/indy-vdr-nodejs";
+import { AnonCredsModule } from "@aries-framework/anoncreds";
+import { AnonCredsRsModule } from "@aries-framework/anoncreds-rs";
+import { anoncreds } from "@hyperledger/anoncreds-nodejs";
+
+import { genesisTransactions } from "./genesisTransactions.js";
 
 export const initialiseOrgAgent = async () => {
   // Simple agent configuration. This sets some basic fields like the wallet
@@ -28,6 +41,27 @@ export const initialiseOrgAgent = async () => {
     modules: {
       askar: new AskarModule({ ariesAskar }),
       connections: new ConnectionsModule({ autoAcceptConnections: true }),
+      anoncredsRs: new AnonCredsRsModule({
+        anoncreds,
+      }),
+      indyVdr: new IndyVdrModule({
+        indyVdr,
+        networks: [
+          {
+            isProduction: false,
+            indyNamespace: "bcovrin:test",
+            genesisTransactions,
+            connectOnStartup: true,
+          },
+        ],
+      }),
+      anoncreds: new AnonCredsModule({
+        registries: [new IndyVdrAnonCredsRegistry()],
+      }),
+      dids: new DidsModule({
+        registrars: [new IndyVdrIndyDidRegistrar()],
+        resolvers: [new IndyVdrIndyDidResolver()],
+      }),
     },
     dependencies: agentDependencies,
   });
