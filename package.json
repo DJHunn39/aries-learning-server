@@ -1,6 +1,6 @@
 {
   "license": "CC-BY-SA-4.0",
-  "name": "validation",
+  "name": "aries-learning-server",
   "main": "index.js",
   "type": "module",
   "version": "1.0.0",
@@ -13,9 +13,9 @@
     "@aries-framework/core": "0.4.2",
     "@aries-framework/indy-vdr": "0.4.2",
     "@aries-framework/node": "0.4.2",
-    "@hyperledger/anoncreds-nodejs": "0.2.0-dev.1",
-    "@hyperledger/aries-askar-nodejs": "0.1.1",
-    "@hyperledger/indy-vdr-nodejs": "0.2.0-dev.2",
+    "@hyperledger/anoncreds-nodejs": "^0.1.0",
+    "@hyperledger/aries-askar-nodejs": "^0.1.0",
+    "@hyperledger/indy-vdr-nodejs": "^0.1.0",
     "dotenv": "^16.3.1"
   },
   "devDependencies": {
@@ -23,5 +23,8 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.29.0"
+  },
+  "overrides": {
+    "ref-napi": "npm:@2060.io/ref-napi"
   }
 }
