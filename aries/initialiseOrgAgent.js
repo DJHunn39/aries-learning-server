@@ -32,15 +32,16 @@ export const initialiseOrgAgent = async () => {
       key: "demoagentorg0000000000000000000",
     },
     endpoints: ["http://localhost:3001"],
+    logger: console,
   };
 
   // A new instance of an agent is created here
-  // Askar can also be replaced by the indy-sdk if required
   const agent = new Agent({
     config,
+    dependencies: agentDependencies,
     modules: {
-      askar: new AskarModule({ ariesAskar }),
-      connections: new ConnectionsModule({ autoAcceptConnections: true }),
+      askar: new AskarModule({ ariesAskar }), // The wallet
+      connections: new ConnectionsModule({ autoAcceptConnections: true }), // To allow us to set up connections
       anoncredsRs: new AnonCredsRsModule({
         anoncreds,
       }),
@@ -63,7 +64,6 @@ export const initialiseOrgAgent = async () => {
         resolvers: [new IndyVdrIndyDidResolver()],
       }),
     },
-    dependencies: agentDependencies,
   });
 
   // Register a simple `WebSocket` outbound transport
